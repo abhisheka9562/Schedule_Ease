@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:money_manager/models/category/category_model.dart';
+import 'package:money_manager/models/category_model.dart';
 
 const Category_Db_Box='category-database';
 
@@ -45,29 +45,17 @@ class CategoryDb1 implements CategoryDb
   }
 
 
-  Future<void> refreshUI() async
-  {
-    final _allCategories=await getcategories();
-    incomeList.value.clear();
-    expenseList.value.clear();
-    Future.forEach(
-      _allCategories,
-    (CategoryModel category)
-    {
-      if(category.type==CategoryType.income)
-      {
-        incomeList.value.add(category);
-      }
-      else
-      {
-        expenseList.value.add(category);
-      }
-    }, );   
+  Future<void> refreshUI() async {
+  final _allCategories = await getcategories();
 
-    incomeList.notifyListeners();
-    expenseList.notifyListeners();
-  }
-  
+  // Optimized: Filter categories directly and assign to ValueNotifier
+  incomeList.value = List.unmodifiable(
+      _allCategories.where((category) => category.type == CategoryType.income).toList());
+
+  expenseList.value = List.unmodifiable(
+      _allCategories.where((category) => category.type == CategoryType.expense).toList());
+}
+
   @override
   Future<void> deletecategory(String categoryId) async
   {

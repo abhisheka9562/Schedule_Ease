@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:money_manager/models/category/transaction_model.dart';
+import 'package:money_manager/models/transaction_model.dart';
 
 const TRANSACTIONS_DB ='transactions_db';
 
@@ -36,8 +36,7 @@ class TransactionsDb implements transactionDBFunctions
   {
     final _list= await getAllTransactions();
     _list.sort((first,second)=> second.date!.compareTo(first.date!));
-    transactionList.value.clear();
-    transactionList.value.addAll(_list);
+    transactionList.value = List.unmodifiable(_list);
   }
   
   @override

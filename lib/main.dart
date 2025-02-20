@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:money_manager/db/category/category_db.dart';
-import 'package:money_manager/models/category/category_model.dart';
-import 'package:money_manager/models/category/transaction_model.dart';
+import 'package:money_manager/db/category_db.dart';
+import 'package:money_manager/models/category_model.dart';
+import 'package:money_manager/models/transaction_model.dart';
 import 'package:money_manager/screens/home/screen_home.dart';
-import 'package:money_manager/screens/transactions/add_transactions.dart';
+import 'package:money_manager/widgets/add_transactions.dart';
 
 void main(List<String> args) async 
 {

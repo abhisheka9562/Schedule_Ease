@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:money_manager/db/category/category_db.dart';
-import 'package:money_manager/models/category/category_model.dart';
+import 'package:money_manager/db/category_db.dart';
+import 'package:money_manager/models/category_model.dart';
 
-class IncomeList extends StatelessWidget {
-  const IncomeList({super.key});
+
+class ExpenseList extends StatelessWidget {
+  const ExpenseList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: CategoryDb1().incomeList, 
+      valueListenable: CategoryDb1().expenseList, 
       builder: (BuildContext ctx, List<CategoryModel> newList, _)
       {
         return ListView.separated(
@@ -19,7 +20,7 @@ class IncomeList extends StatelessWidget {
           child: ListTile(
             title: Text(category.name),
             trailing: IconButton(
-              onPressed: () { CategoryDb1.instance.deletecategory(category.id); },
+              onPressed: () { CategoryDb1.instance.deletecategory(category.id);},
               icon: Icon(Icons.delete)
             ,),
           ),
